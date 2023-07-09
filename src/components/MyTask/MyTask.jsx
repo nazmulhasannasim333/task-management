@@ -14,7 +14,7 @@ const MyTask = () => {
     enabled: !loading,
     queryFn: async () => {
       const response = await axios(
-        `http://localhost:5000/mytask/${user?.email}`
+        `https://task-management-server-gray.vercel.app/mytask/${user?.email}`
       );
       console.log(response.data);
       return response.data;
@@ -33,7 +33,7 @@ const MyTask = () => {
     }).then((result) => {
       if (result.isConfirmed) {
         axios
-          .delete(`http://localhost:5000/deletetask/${task._id}`)
+          .delete(`https://task-management-server-gray.vercel.app/deletetask/${task._id}`)
           .then((res) => {
             if (res.data.deletedCount > 0) {
               refetch();

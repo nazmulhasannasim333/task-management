@@ -17,7 +17,7 @@ const Dashboard = () => {
     queryKey: ["allpayment"],
     enabled: !loading,
     queryFn: async () => {
-      const response = await axios(`http://localhost:5000/alltask`);
+      const response = await axios(`https://task-management-server-gray.vercel.app/alltask`);
       setTaskStatus(response.data);
       return response.data;
     },
@@ -25,7 +25,7 @@ const Dashboard = () => {
 
   const handleSearchText = () => {
     axios
-      .get(`http://localhost:5000/gettaskbytitle/${seachText}`)
+      .get(`https://task-management-server-gray.vercel.app/gettaskbytitle/${seachText}`)
       .then((res) => {
         console.log(res.data);
         setTaskStatus(res.data);

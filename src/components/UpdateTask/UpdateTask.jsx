@@ -18,7 +18,7 @@ const UpdateTask = () => {
       const onSubmit = (data) => {
         const {title, date, status,  details} = data
         const task = {title, date, status, details}
-        axios.put(`http://localhost:5000/mytask/${loadedTask._id}`, task)
+        axios.put(`https://task-management-server-gray.vercel.app/mytask/${loadedTask._id}`, task)
         .then(res => {
             console.log(res.data);
             if(res.data.modifiedCount > 0){

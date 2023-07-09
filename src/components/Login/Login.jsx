@@ -42,7 +42,7 @@ const Login = () => {
       const signinGogle = result.user;
 
 
-      axios.post(`http://localhost:5000/user`, {
+      axios.post(`https://task-management-server-gray.vercel.app/user`, {
         name: signinGogle.displayName,
          email: signinGogle.email,
         date: new Date()

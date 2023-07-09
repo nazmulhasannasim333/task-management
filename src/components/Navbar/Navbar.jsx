@@ -1,4 +1,5 @@
-import React, { useContext, useState } from "react";
+import axios from "axios";
+import React, { useContext, useEffect, useState } from "react";
 import { FaBars, FaTimes } from "react-icons/fa";
 import { Link, NavLink } from "react-router-dom";
 import { AuthContext } from "../../providers/AuthProvider";
@@ -6,6 +7,16 @@ import { AuthContext } from "../../providers/AuthProvider";
 const Navbar = () => {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const { user, logout } = useContext(AuthContext);
+  const [currUser, setCurrUser] = useState({})
+
+
+  useEffect(() => {
+    axios.get(`https://task-management-server-gray.vercel.app/userprofile/${user?.email}`)
+    .then(res => {
+      // console.log(res.data);
+      setCurrUser(res.data)
+    })
+  },[user])
 
   const handleLogout = () => {
     logout(() => {
@@ -49,7 +60,7 @@ const Navbar = () => {
                 </NavLink>
               </li>
            {
-            user && 
+            user && currUser.role === "admin" &&
             <li>
             <NavLink
               to="/dashboard"

@@ -20,7 +20,7 @@ const Register = () => {
 
     setShowError("")
 
-    axios.post(`http://localhost:5000/user`, {
+    axios.post(`https://task-management-server-gray.vercel.app/user`, {
         name,
         email,
         date: new Date()

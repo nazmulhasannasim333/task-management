@@ -19,7 +19,7 @@ const AlllTask = ({allTask, refetch}) => {
         }).then((result) => {
           if (result.isConfirmed) {
             axios
-              .delete(`http://localhost:5000/deletetask/${task._id}`)
+              .delete(`https://task-management-server-gray.vercel.app/deletetask/${task._id}`)
               .then((res) => {
                 if (res.data.deletedCount > 0) {
                   refetch();

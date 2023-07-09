@@ -11,7 +11,7 @@ const Home = () => {
     const mavigate = useNavigate()
 
     useEffect(() => {
-        axios.get(`http://localhost:5000/users`)
+        axios.get(`https://task-management-server-gray.vercel.app/users`)
         .then(res => {
             // console.log(res.data);
             setAllUsers(res.data)
@@ -28,7 +28,7 @@ const Home = () => {
         const {title, date, status, useremail, details} = data
         const task = {title, date, status, useremail, details}
         if(user){
-            axios.post(`http://localhost:5000/task`, task)
+            axios.post(`https://task-management-server-gray.vercel.app/task`, task)
         .then(res => {
             console.log(res.data);
             if(res.data.insertedId){
@@ -42,7 +42,21 @@ const Home = () => {
             }
         })
         }else{
-            mavigate("/login")
+
+          Swal.fire({
+            title: "Are You Not Logged In User?",
+            text: "Please Login to add your task",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Login",
+          }).then((result) => {
+            if (result.isConfirmed) {
+              mavigate("/login")
+            }
+          });
+            
         }
       }
 
@@ -59,6 +73,7 @@ const Home = () => {
               <input
                 className="w-full text-black p-2 border lg:p-3 rounded-md focus:outline-none"
                 {...register("title")}
+                required
               />
             </div>
             <div className="pt-5">
@@ -69,6 +84,7 @@ const Home = () => {
               type='date'
                 className=" w-full text-black border p-2 lg:p-3 rounded-md focus:outline-none"
                 {...register("date")}
+                required
               />
             </div>
             <div className="pt-5">
@@ -78,6 +94,7 @@ const Home = () => {
               <select
                 className=" w-full text-black border p-2 lg:p-3 rounded-md focus:outline-none"
                 {...register("status")}
+                required
               >
                 <option disabled selected value="select">Select Status</option>
                 <option value="Progress">Progress</option>
@@ -92,6 +109,7 @@ const Home = () => {
               <select
                 className=" w-full text-black border p-2 lg:p-3 rounded-md focus:outline-none"
                 {...register("useremail")}
+                required
               >
                 <option disabled selected value="">Select User</option>
                 {
@@ -107,6 +125,7 @@ const Home = () => {
             <textarea
               className=" w-full text-black border pb-10 lg:pb-20 bg-slate-100 rounded-md focus:outline-none"
               {...register("details")}
+              required
             />
           </div>
           <button
